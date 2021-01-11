@@ -1,0 +1,281 @@
+/*Fonts*/
+@font-face {
+    font-family: "SemiBold";
+    src: url("../fonts/Montserrat-SemiBold.ttf") format("truetype")
+}
+@font-face {
+    font-family: "Regular";
+    src: url("../fonts/Montserrat-Regular.ttf") format("truetype")
+}
+@font-face {
+    font-family: "Medium";
+    src: url("../fonts/Montserrat-Medium.ttf") format("truetype")
+}
+@font-face {
+    font-family: "Bold";
+    src: url("../fonts/Montserrat-Bold.ttf") format("truetype")
+}
+@font-face {
+    font-family: "ExtraBold";
+    src: url("../fonts/Montserrat-ExtraBold.ttf") format("truetype")
+}
+
+/*Animation*/
+.workflow{
+}
+body{
+    font-family: "Medium";
+    overflow: hidden;
+}
+.menu{
+    color: #fff;
+    height: 80px;
+    background-color: #1B68FF;
+    padding: 10px 0px;
+}
+.menu_vt{
+    background-image: url("../images/vt_logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 60px;
+    width: 60px;
+    float: left;
+    margin-right: 10px;
+}
+.tools{
+    left: 25px;
+    bottom: 10px;
+    position: absolute;
+}
+.btn-clear{
+}
+.canvasNotify{
+    line-height: 40px;
+    padding-left: 10px;
+}
+.menu_nameLab{
+    font-size: 24px;
+    font-family: "SemiBold";
+    height: 30px;
+}
+.menu_nameSubject{
+    font-size: 18px;
+    font-family: "Medium";
+    height: 20px;
+}
+.author_info{
+    padding-top: 8px;
+    float: right;
+    text-align: right;
+}
+.author_name,.author_group{
+    font-size: 18px;
+    font-family: Medium;
+    height: 20px;
+}
+.welcome{
+    padding-top: 50px;
+}
+
+
+.author_pic{
+    height: 60px;
+    width: 60px;
+    background-image: url("../images/author.JPG");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-left: 15px;
+    float: right;
+}
+
+.workflow.container{
+    max-width: 900px;
+    padding-top: 30px;
+}
+.graphics{
+    min-height: 450px;
+}
+.control{
+    min-height: 450px;
+}
+#canvas{
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
+    background-image: url("../images/areas.png");
+    position: relative;
+}
+canvas{
+    height: inherit;
+    width: inherit;
+}
+#form{
+    height: 100%;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+}
+.form_x{
+    max-width: 100%;
+    margin: auto;
+    padding-bottom: 15px;
+}
+.form_z{
+
+}
+
+.btn-x{
+    width: 45px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+.btn-pressed{
+    opacity: 0.5;
+}
+
+.form_y{
+    padding-bottom: 15px;
+}
+input{
+    text-align: center;
+}
+.form_z{
+    padding-bottom: 15px;
+}
+.form_submit > button{
+    width: 100%;
+}
+
+.results{
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+}
+.table{
+    height: inherit;
+    background: #FFFFFF;
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 15px;
+    max-height: 510px;
+    overflow-y: scroll;
+
+}
+.mainTable{
+    max-height: 120px;
+    overflow-y: scroll;
+}
+table{
+    width: 100%;
+    text-align: center;
+    border-collapse: separate;
+}
+.resultsTypes{
+    background-color: #1B68FF;
+    color: #fff;
+}
+tr > td{
+    width: 25%;
+}
+.resultsTypes > td:first-child{
+    border-radius: 15px 0px 0px 0px;
+}
+.resultsTypes > td:last-child{
+    border-radius: 0px 15px 0px 0px;
+}
+.result_back{
+    text-align: center;
+    padding: 10px 0px;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 30px;
+}
+h2{
+    font-size: 20px;
+    text-align: center;
+}
+
+{box-sizing: border-box;}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+}
+.welcome-button{
+    margin-top: 30px;
+    text-align: center;
+}
+/* The popup form - hidden by default */
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+    background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
