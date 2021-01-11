@@ -5,7 +5,7 @@ let menu_clicker = false;
 let active_screen = 0;
 function optimizeTable(){
   reDraw();
-  if($(window).width() >= 851){
+  if($(window).width() > 852){
     $('.menu_mobile').hide();
     menu_clicker = false;
     let table_height = $(window).height() - $('.graphics').height() - $('.header').height();
@@ -42,60 +42,36 @@ window.onresize = function(event) {
 };
 $(window).load(function (){
   if(window.location.href.includes("main")){
+    clearCanvas();
     //Обрабатываем клики
-    const canvas = document.querySelector('#render');
-    canvas.addEventListener('mousedown', function(e) {
-      getMousePosition(canvas, e);
-    });
-    //Адаптивная таблица
-    optimizeTable();
 
-    //Рисуем график
-    drawGraph();
 
-    $('.btn-r:eq(0)').click(function (){
-      r = 1;
-      reDraw();
-    });
-    $('.btn-r:eq(1)').click(function (){
-      r = 2;
-      reDraw();
-    });
-    $('.btn-r:eq(2)').click(function (){
-      r = 3;
-      reDraw();
-    });
 
-    $('.btn-clear').click(function (){
-      clearCanvas();
-    });
-
-    function drawGraph(){
-      let canvas = document.getElementById('render');
-      let image = new Image();
-      //image.src = 'assets/images/areas.png';
-      image.onload = function () {
-        let canvasContext = canvas.getContext('2d');
-        let wrh = image.width / image.height;
-        let newWidth = canvas.width;
-        let newHeight = newWidth / wrh;
-        if (newHeight > canvas.height) {
-          newHeight = canvas.height;
-          newWidth = newHeight * wrh;
-        }
-        let xOffset = newWidth < canvas.width ? ((canvas.width - newWidth) / 2) : 0;
-        let yOffset = newHeight < canvas.height ? ((canvas.height - newHeight) / 2) : 0;
-
-        canvasContext.drawImage(image,
-          canvas.width / 2 - image.width / 2,
-          canvas.height / 2 - image.height / 2
-        );
-        // canvasContext.drawImage(image, xOffset, yOffset, newWidth, newHeight);
-      };
-    }
   }
 })
+function drawGraph(){
+  let canvas = document.getElementById('render');
+  let image = new Image();
+  //image.src = 'assets/images/areas.png';
+  image.onload = function () {
+    let canvasContext = canvas.getContext('2d');
+    let wrh = image.width / image.height;
+    let newWidth = canvas.width;
+    let newHeight = newWidth / wrh;
+    if (newHeight > canvas.height) {
+      newHeight = canvas.height;
+      newWidth = newHeight * wrh;
+    }
+    let xOffset = newWidth < canvas.width ? ((canvas.width - newWidth) / 2) : 0;
+    let yOffset = newHeight < canvas.height ? ((canvas.height - newHeight) / 2) : 0;
 
+    canvasContext.drawImage(image,
+      canvas.width / 2 - image.width / 2,
+      canvas.height / 2 - image.height / 2
+    );
+    // canvasContext.drawImage(image, xOffset, yOffset, newWidth, newHeight);
+  };
+}
 function drawDot(x,y,r, mode){
   var canvas = document.getElementById('render');
   var canvasContext = canvas.getContext('2d');
@@ -141,6 +117,7 @@ function sendClickPoints(x,y,r){
 
     },
     success: function (data) {
+      console.log(data);
     $('#resultTableBody').append("<tr><td>"+x+"</td><td>"+y+"</td><td>"+r+"</td><td>"+data.point_status+"</td></tr>");
       tableIconShow();
     },
@@ -183,6 +160,7 @@ function getMousePosition(canvas, event) {
   //let y2 = 425* corrY;
   let y3 = 228 * corrY;
   //let y3 = 250* corrY;
+  console.log(x);
   if($(window).width() < 851 && $(window).width() > 575){
     x1 = 66;
     x2 = 472;
@@ -269,7 +247,8 @@ function callAngularFunction() {
 
 function exitApp(){
   localStorage.clear();
-  window.location.href = "login";
+  clearCanvas();
+  window.location.href = "";
 }
 
 

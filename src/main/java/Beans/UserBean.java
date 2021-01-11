@@ -8,12 +8,13 @@ import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity(name="username")
+@Entity(name="users")
 public class UserBean implements Serializable {
     @Getter
     @Setter
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true, nullable = false, name = "id")
     private Integer id;
     @Getter
     @Setter

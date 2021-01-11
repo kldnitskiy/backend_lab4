@@ -7,7 +7,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="blog" />
-          <factory-entry name="sample" />
+          <factory-entry name="sample" value="8aec91b7-bf05-4c7c-9004-b182a62cff9c" />
         </datasource-mapping>
         <naming-strategy-map />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />

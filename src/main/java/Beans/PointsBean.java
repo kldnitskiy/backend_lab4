@@ -1,23 +1,42 @@
 package Beans;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
-@Entity
+import javax.persistence.*;
+
+@Entity(name="points")
 public class PointsBean {
-    private double x;
-    private double y;
-    private double r;
-    private boolean res;
+    @Getter
+    @Setter
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true)
     private Integer id;
+    @Getter
+    @Setter
+    private float x;
+    @Getter
+    @Setter
+    private float y;
+    @Getter
+    @Setter
+    private float r;
+    @Getter
+    @Setter
+    private boolean status;
+    @Getter
+    @Setter
+    private String username;
 
-    public double getY() { return y; }
-    public double getX() { return x; }
-    public double getR() { return r; }
-    public boolean getRes() { return res; }
-    public void setX(double x) { this.x = x; }
-    public void setY(double y) { this.y = y; }
-    public void setR(double r) { this.r = r; }
-    public void setRes(boolean res){ this.res = res; }
+    public PointsBean(){
+
+    }
+    public PointsBean(Float x, Float y, Float r, Boolean status, String username) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.status = status;
+        this.username = username;
+    }
 }

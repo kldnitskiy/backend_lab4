@@ -36,12 +36,12 @@ public class UsersAPI {
         return Response.ok().entity(ResponseEntity).build();
     }
 
-    @GET
-    @Produces("application/json")
-    @Path("/test")
-    public Response testJPA(){
-       return database.checkUserExistence();
-    }
+//    @GET
+//    @Produces("application/json")
+//    @Path("/test")
+//    public Response testJPA(){
+//       return database.checkUserExistence();
+//    }
 
     @GET
     @Path("/get-session")
@@ -50,7 +50,7 @@ public class UsersAPI {
     public Response getSessionUser(@HeaderParam("Authorization") String authorization) throws SQLException {
             String token = authorization.substring("Enigma".length()).trim();
             Claims jwt = Jwts.parser().setSigningKey(CreateKey.generateKey()).parseClaimsJws(token).getBody();
-            if(database.UserAlreadyExist(jwt.getSubject())){
+            if(!database.userAlreadyExisted(jwt.getSubject())){
                 ServiceCheck response = new ServiceCheck("success", "Пользователь авторизирован");
                 String ResponseEntity = new Gson().toJson(response);
                 return Response.ok().entity(ResponseEntity).build();
@@ -89,6 +89,7 @@ public class UsersAPI {
         }else{
             String ResponseEntity = new Gson().toJson(database.loginUser(username, pwd));
             return Response.ok().entity(ResponseEntity).build();
+
         }
     }
 
@@ -113,14 +114,13 @@ public class UsersAPI {
             String ResponseEntity = new Gson().toJson(response);
             return Response.ok().entity(ResponseEntity).build();
         }else{
-            if(database.UserAlreadyExist(username)){
-                ServiceCheck response = new ServiceCheck("error", "Пользователь с таким именем уже существует");
-                String ResponseEntity = new Gson().toJson(response);
-                return Response.ok().entity(ResponseEntity).build();
-            }else{
+            if(database.userAlreadyExisted(username)){
                 String ResponseEntity = new Gson().toJson(database.registerUser(username, pwd, isu, group_number, email));
-                return Response.ok().entity(ResponseEntity).build();
+               return Response.ok().entity(ResponseEntity).build();
             }
+            ServiceCheck response = new ServiceCheck("error", "Данный пользователь уже существует");
+            String ResponseEntity = new Gson().toJson(response);
+            return Response.ok().entity(ResponseEntity).build();
         }
     }
 

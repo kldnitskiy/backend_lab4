@@ -14,10 +14,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -28,12 +25,13 @@ import java.util.List;
 @Path(value = "/points")
 @RequestScoped
 public class PointsAPI {
-    @EJB
-    private Database database;
+   @EJB
+   private Database database;
 
     @POST
     @TokenVerify
     @Path("/save")
+    @Produces("application/json")
     public Response renderPoint(@HeaderParam("Authorization") String authorization, @FormParam("x") String x, @FormParam("y") Float y, @FormParam("r") String r, @Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException, SQLException, NamingException {
         if(x == null || y == null || r == null){
             ServiceCheck response = new ServiceCheck("error", "Не все параметры заполнены");
@@ -65,6 +63,7 @@ public class PointsAPI {
         }
             OperationResult response = new OperationResult("success", "Сохранено точек: " + succeded_points + "/" + all_points, validation_status);
             String ResponseEntity = new Gson().toJson(response);
+
             return Response.ok().entity(ResponseEntity).build();
 
     }
@@ -74,11 +73,13 @@ public class PointsAPI {
     @POST
     @TokenVerify
     @Path("/get")
+    @Produces("application/json")
     public Response getPoints(@HeaderParam("Authorization") String authorization) throws SQLException, NamingException {
+        System.out.println(authorization);
         String token = authorization.substring("Enigma".length()).trim();
         Claims jwt = Jwts.parser().setSigningKey(CreateKey.generateKey()).parseClaimsJws(token).getBody();
         System.out.println(jwt.getSubject());
-        String ResponseEntity = new Gson().toJson(database.getPoint(jwt.getSubject()));
+       String ResponseEntity = new Gson().toJson(database.getPoint(jwt.getSubject()));
         return Response.ok().entity(ResponseEntity).build();
     }
 
