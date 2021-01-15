@@ -3,7 +3,6 @@ package Token;
 import io.jsonwebtoken.Jwts;
 
 import javax.annotation.Priority;
-import javax.ejb.EJB;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -18,7 +17,6 @@ import java.security.Key;
 @Priority(Priorities.AUTHENTICATION)
 @Provider
 public class TokenFilter implements ContainerRequestFilter {
-    @EJB
     CreateKey createKey;
 
     @Override

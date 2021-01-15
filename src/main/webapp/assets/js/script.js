@@ -5,7 +5,7 @@ let menu_clicker = false;
 let active_screen = 0;
 function optimizeTable(){
   reDraw();
-  if($(window).width() > 852){
+  if($(window).width() >= 851){
     $('.menu_mobile').hide();
     menu_clicker = false;
     let table_height = $(window).height() - $('.graphics').height() - $('.header').height();

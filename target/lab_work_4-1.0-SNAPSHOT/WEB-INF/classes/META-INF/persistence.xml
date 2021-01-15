@@ -3,18 +3,15 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
     <persistence-unit name="sample" transaction-type="JTA">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+<!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
+        <jta-data-source>java:/Postgres</jta-data-source>
         <class>Beans.UserBean</class>
         <class>Beans.PointsBean</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/postgres"/>
-            <property name="hibernate.connection.username" value="postgres"/>
-            <property name="hibernate.connection.password" value="zjk620"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="jboss.as.jpa.providerModule" value="org.hibernate:5.0"/>
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>-->
+<!--            <property name="hibernate.show_sql" value="true"/>-->
+<!--            <property name="jboss.as.jpa.providerModule" value="org.hibernate:5.0"/>-->
         </properties>
     </persistence-unit>
 </persistence>
