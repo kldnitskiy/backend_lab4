@@ -3,16 +3,12 @@ package Token;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-@Stateless
 public class Token {
-    @EJB
     CreateKey createKey;
 
     public static String createToken(String login){
