@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -36,7 +37,7 @@ public class PointsAPI {
         if(x == null || y == null || r == null){
             ServiceCheck response = new ServiceCheck("error", "Не все параметры заполнены");
             String ResponseEntity = new Gson().toJson(response);
-            return Response.ok().entity(ResponseEntity).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(ResponseEntity).type(MediaType.APPLICATION_JSON).build();
         }
         List<String> x_items = Arrays.asList(x.split("\\s*,\\s*"));
         List<String> r_items = Arrays.asList(r.split("\\s*,\\s*"));
@@ -62,9 +63,7 @@ public class PointsAPI {
             }
         }
             OperationResult response = new OperationResult("success", "Сохранено точек: " + succeded_points + "/" + all_points, validation_status);
-            String ResponseEntity = new Gson().toJson(response);
-
-            return Response.ok().entity(ResponseEntity).build();
+            return Response.ok().entity(response).type(MediaType.APPLICATION_JSON).build();
 
     }
 
@@ -79,8 +78,7 @@ public class PointsAPI {
         String token = authorization.substring("Enigma".length()).trim();
         Claims jwt = Jwts.parser().setSigningKey(CreateKey.generateKey()).parseClaimsJws(token).getBody();
         System.out.println(jwt.getSubject());
-       String ResponseEntity = new Gson().toJson(database.getPoint(jwt.getSubject()));
-        return Response.ok().entity(ResponseEntity).build();
+        return Response.ok().entity(database.getPoint(jwt.getSubject())).type(MediaType.APPLICATION_JSON).build();
     }
 
     public Boolean validation(Float x, Float y, Float r){

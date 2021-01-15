@@ -16,6 +16,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
@@ -32,16 +33,8 @@ public class UsersAPI {
     @Produces("application/json")
     public Response serviceCheck(){
         ServiceCheck response = new ServiceCheck("success", "service-check is working");
-        String ResponseEntity = new Gson().toJson(response);
-        return Response.ok().entity(ResponseEntity).build();
+        return Response.ok().entity(response).type(MediaType.APPLICATION_JSON).build();
     }
-
-//    @GET
-//    @Produces("application/json")
-//    @Path("/test")
-//    public Response testJPA(){
-//       return database.checkUserExistence();
-//    }
 
     @GET
     @Path("/get-session")
@@ -52,12 +45,10 @@ public class UsersAPI {
             Claims jwt = Jwts.parser().setSigningKey(CreateKey.generateKey()).parseClaimsJws(token).getBody();
             if(!database.userAlreadyExisted(jwt.getSubject())){
                 ServiceCheck response = new ServiceCheck("success", "Пользователь авторизирован");
-                String ResponseEntity = new Gson().toJson(response);
-                return Response.ok().entity(ResponseEntity).build();
+                return Response.ok().entity(response).type(MediaType.APPLICATION_JSON).build();
             }else{
                 ServiceCheck response = new ServiceCheck("error", "Доступ запрещен");
-                String ResponseEntity = new Gson().toJson(response);
-                return Response.ok().entity(ResponseEntity).build();
+                return Response.status(Response.Status.UNAUTHORIZED).entity(response).type(MediaType.APPLICATION_JSON).build();
             }
 
 
@@ -69,8 +60,7 @@ public class UsersAPI {
     public Response checkUser(@QueryParam("username") String username) throws SQLException {
         System.out.println(username);
         ServiceCheck response = new ServiceCheck("success", username);
-        String ResponseEntity = new Gson().toJson(response);
-        return Response.ok().entity(ResponseEntity).build();
+        return Response.ok().entity(response).type(MediaType.APPLICATION_JSON).build();
     }
 
     @POST
@@ -84,11 +74,9 @@ public class UsersAPI {
         }
         if(validator.getBad_parameter() != null){
             ValidateParameters response = new ValidateParameters("error", validator.getMessage(), validator.getBad_parameter());
-            String ResponseEntity = new Gson().toJson(response);
-            return Response.ok().entity(ResponseEntity).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(response).type(MediaType.APPLICATION_JSON).build();
         }else{
-            String ResponseEntity = new Gson().toJson(database.loginUser(username, pwd));
-            return Response.ok().entity(ResponseEntity).build();
+            return Response.ok().entity(database.loginUser(username, pwd)).type(MediaType.APPLICATION_JSON).build();
 
         }
     }
@@ -111,16 +99,13 @@ public class UsersAPI {
         //Returning request based on validation results
         if(validator.getBad_parameter() != null){
             ValidateParameters response = new ValidateParameters("error", validator.getMessage(), validator.getBad_parameter());
-            String ResponseEntity = new Gson().toJson(response);
-            return Response.ok().entity(ResponseEntity).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(response).type(MediaType.APPLICATION_JSON).build();
         }else{
             if(database.userAlreadyExisted(username)){
-                String ResponseEntity = new Gson().toJson(database.registerUser(username, pwd, isu, group_number, email));
-               return Response.ok().entity(ResponseEntity).build();
+               return Response.ok().entity(database.registerUser(username, pwd, isu, group_number, email)).type(MediaType.APPLICATION_JSON).build();
             }
             ServiceCheck response = new ServiceCheck("error", "Данный пользователь уже существует");
-            String ResponseEntity = new Gson().toJson(response);
-            return Response.ok().entity(ResponseEntity).build();
+            return Response.status(Response.Status.CONFLICT).entity(response).type(MediaType.APPLICATION_JSON).build();
         }
     }
 
