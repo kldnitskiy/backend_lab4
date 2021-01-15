@@ -1,10 +1,7 @@
 package Beans;
 
-import Entities.UserProfile;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
 import java.io.Serializable;
 
