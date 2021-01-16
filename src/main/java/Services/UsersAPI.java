@@ -3,6 +3,7 @@ package Services;
 import Beans.UserBean;
 import Model.Database;
 import Model.Validation;
+import Responses.LoginUser;
 import Responses.ServiceCheck;
 import Responses.ValidateParameters;
 import Token.CreateKey;
@@ -76,7 +77,13 @@ public class UsersAPI {
             ValidateParameters response = new ValidateParameters("error", validator.getMessage(), validator.getBad_parameter());
             return Response.status(Response.Status.BAD_REQUEST).entity(response).type(MediaType.APPLICATION_JSON).build();
         }else{
-            return Response.ok().entity(database.loginUser(username, pwd)).type(MediaType.APPLICATION_JSON).build();
+            LoginUser loginUser = database.loginUser(username, pwd);
+            if(loginUser.getStatus()=="success"){
+                return Response.ok().entity(loginUser).type(MediaType.APPLICATION_JSON).build();
+            }else{
+                return Response.status(Response.Status.NOT_FOUND).entity(loginUser).type(MediaType.APPLICATION_JSON).build();
+            }
+
 
         }
     }
