@@ -78,14 +78,14 @@ public class Validation {
     }
 
     public void validate_repeat(String pwd, String pwd_repeat) {
-        if(pwd_repeat != null){
+        if(pwd_repeat != null && pwd != null){
             if(!pwd.equals(pwd_repeat)){
                 bad_parameter = "Пароли";
                 message = "Пароли не совпадают";
             }
         }else{
             bad_parameter = "Повторный пароль";
-            message = "Повторный пароль не заполнен 0_0";
+            message = "Повторный пароль или сам пароль не заполнены 0_0";
         }
 
     }
