@@ -10,7 +10,7 @@ public class PointsBean {
     @Getter
     @Setter
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(unique = true)
     private Integer id;
     @Getter
