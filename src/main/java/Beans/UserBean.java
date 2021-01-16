@@ -10,7 +10,7 @@ public class UserBean implements Serializable {
     @Getter
     @Setter
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(unique = true, nullable = false, name = "id")
     private Integer id;
     @Getter
