@@ -11,6 +11,7 @@ public class UserBean implements Serializable {
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(unique = true, nullable = false, name = "id")
     private Integer id;
     @Getter
     @Setter

@@ -36,8 +36,7 @@ public class PointsAPI {
     public Response renderPoint(@HeaderParam("Authorization") String authorization, @FormParam("x") String x, @FormParam("y") Float y, @FormParam("r") String r, @Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException, SQLException, NamingException {
         if(x == null || y == null || r == null){
             ServiceCheck response = new ServiceCheck("error", "Не все параметры заполнены");
-            String ResponseEntity = new Gson().toJson(response);
-            return Response.status(Response.Status.BAD_REQUEST).entity(ResponseEntity).type(MediaType.APPLICATION_JSON).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(response).type(MediaType.APPLICATION_JSON).build();
         }
         List<String> x_items = Arrays.asList(x.split("\\s*,\\s*"));
         List<String> r_items = Arrays.asList(r.split("\\s*,\\s*"));
