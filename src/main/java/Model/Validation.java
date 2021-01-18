@@ -25,7 +25,11 @@ public class Validation {
         if(username != null){
             if(username.length() < 4){
                 bad_parameter = "Имя пользователя";
-                message = "Имя пользователя не может быть меньше пяти символов";
+                message = "Имя пользователя не может быть меньше четырех символов";
+            }
+            if(username.length() > 15){
+                bad_parameter = "Имя пользователя";
+                message = "Как-то много символов в имени пользователя. Давайте меньше 15.";
             }
         }else{
             bad_parameter = "Имя пользователя";

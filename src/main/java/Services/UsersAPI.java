@@ -41,15 +41,15 @@ public class UsersAPI {
     @TokenVerify
     @Produces("application/json")
     public Response getSessionUser(@HeaderParam("Authorization") String authorization) throws SQLException {
-            String token = authorization.substring("Enigma".length()).trim();
-            Claims jwt = Jwts.parser().setSigningKey(CreateKey.generateKey()).parseClaimsJws(token).getBody();
-            if(!database.userAlreadyExisted(jwt.getSubject())){
-                ServiceCheck response = new ServiceCheck("success", "Пользователь авторизирован");
-                return Response.ok().entity(response).type(MediaType.APPLICATION_JSON).build();
-            }else{
-                ServiceCheck response = new ServiceCheck("error", "Доступ запрещен");
-                return Response.status(Response.Status.UNAUTHORIZED).entity(response).type(MediaType.APPLICATION_JSON).build();
-            }
+        String token = authorization.substring("Enigma".length()).trim();
+        Claims jwt = Jwts.parser().setSigningKey(CreateKey.generateKey()).parseClaimsJws(token).getBody();
+        if(!database.userAlreadyExisted(jwt.getSubject())){
+            ServiceCheck response = new ServiceCheck("success", "Пользователь авторизирован");
+            return Response.ok().entity(response).type(MediaType.APPLICATION_JSON).build();
+        }else{
+            ServiceCheck response = new ServiceCheck("error", "Доступ запрещен");
+            return Response.status(Response.Status.UNAUTHORIZED).entity(response).type(MediaType.APPLICATION_JSON).build();
+        }
 
 
     }
@@ -108,7 +108,7 @@ public class UsersAPI {
             return Response.status(Response.Status.BAD_REQUEST).entity(response).type(MediaType.APPLICATION_JSON).build();
         }else{
             if(database.userAlreadyExisted(username)){
-               return Response.ok().entity(database.registerUser(username, pwd, isu, group_number, email)).type(MediaType.APPLICATION_JSON).build();
+                return Response.ok().entity(database.registerUser(username, pwd, isu, group_number, email)).type(MediaType.APPLICATION_JSON).build();
             }
             ServiceCheck response = new ServiceCheck("error", "Данный пользователь уже существует");
             return Response.status(Response.Status.CONFLICT).entity(response).type(MediaType.APPLICATION_JSON).build();
